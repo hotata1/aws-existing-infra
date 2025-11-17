@@ -1,0 +1,23 @@
+# ----------------------------------------
+# Terraform Files to Ignore
+# ----------------------------------------
+
+# Terraformのローカル状態ファイル（機密情報を含む）
+*.tfstate
+*.tfstate.*
+# バックアップファイル
+*.tfstate.backup
+
+# クラッシュログ
+crash.log
+
+# 実行計画ファイル
+*.tfplan
+*.tfplan.json
+
+# プロバイダーのプラグインとモジュールのキャッシュ
+.terraform/
+.terraform.lock.hcl
+
+# Terraformの履歴ファイル (非表示ファイル)
+.terraform_history
