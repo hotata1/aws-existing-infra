@@ -29,14 +29,3 @@ terraform {
 provider "aws" {
   region = "ap-northeast-1" # 例: 東京リージョン
 }
-
-# ----------------------------------------
-# ★ S3バケットをインポートするための指示ブロック ★
-# ----------------------------------------
-import {
-  # 自動生成される resource ブロックのタイプとローカル名を指定
-  to = aws_s3_bucket.state_bucket
-  
-  # AWS上での実際のリソースID（バケット名）
-  id = "terraform-state-2025-minecraftserver"
-}
