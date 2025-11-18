@@ -1,5 +1,22 @@
 # 使用するプロバイダー（AWS）とバージョンを指定します
 terraform {
+  # ----------------------------------------
+  # ★ リモートS3バックエンドの設定 ★
+  # ----------------------------------------
+  backend "s3" {
+    # 状態ファイルが保存されるS3バケット名
+    bucket         = "terraform-state-2025-minecraftserver" 
+    
+    # 状態ファイルがバケット内に保存されるキー（パス）
+    key            = "aws-existing-infra/terraform.tfstate" 
+    
+    # 使用するAWSリージョン
+    region         = "ap-northeast-1" 
+    
+    # オプション: 状態ファイルの転送を暗号化
+    encrypt        = true 
+  }
+  
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -9,7 +26,6 @@ terraform {
 }
 
 # AWSプロバイダーを設定します
-# regionは、リソースを作成したいAWSのリージョンに置き換えてください
 provider "aws" {
   region = "ap-northeast-1" # 例: 東京リージョン
 }
