@@ -27,5 +27,5 @@ terraform {
 
 # AWSプロバイダーを設定します
 provider "aws" {
-  region = "ap-northeast-1" # 例: 東京リージョン
+  region = var.aws_region
 }

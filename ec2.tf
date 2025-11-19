@@ -7,7 +7,7 @@ resource "aws_instance" "minecraft_server" {
   ami           = "ami-0d5f5a4eaac1481cb" 
   
   # 2. 💡 既存のインスタンスタイプに修正
-  instance_type = "t3.medium" # 既存はt3.mediumのようです
+  instance_type = var.instance_type 
 
   # 3. 💡 既存のサブネット (Subnet C) に修正
   subnet_id     = aws_subnet.subnet_c.id   

@@ -13,12 +13,12 @@ resource "aws_security_group" "minecraft_sg" {
     # Egress Rules (アウトバウンド)
     egress = [
         {
-            cidr_blocks      = ["0.0.0.0/0"]
-            description      = "" # null や "null" ではなく空文字でシンプルに
+            cidr_blocks      = var.egress_cidr_blocks # 変数に置き換え
+            description      = "All traffic out"
             from_port        = 0
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
-            protocol         = "-1" # すべてのプロトコル
+            protocol         = "-1"
             security_groups  = []
             self             = false
             to_port          = 0
@@ -28,8 +28,8 @@ resource "aws_security_group" "minecraft_sg" {
     # Ingress Rules (インバウンド)
     ingress = [
         {
-            cidr_blocks      = ["0.0.0.0/0"]
-            description      = ""
+            cidr_blocks      = var.minecraft_bedrock_allow_cidr # 変数に置き換え
+            description      = "Minecraft Bedrock Connection (UDP 19132)"
             from_port        = 19132
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
@@ -39,8 +39,8 @@ resource "aws_security_group" "minecraft_sg" {
             to_port          = 19132
         },
         {
-            cidr_blocks      = ["0.0.0.0/0"]
-            description      = ""
+            cidr_blocks      = var.ssh_allow_cidr # 変数に置き換え
+            description      = "SSH access (TCP 22)"
             from_port        = 22
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
@@ -50,8 +50,8 @@ resource "aws_security_group" "minecraft_sg" {
             to_port          = 22
         },
         {
-            cidr_blocks      = ["0.0.0.0/0"]
-            description      = "Allow minecraft connections"
+            cidr_blocks      = var.minecraft_java_allow_cidr # 変数に置き換え
+            description      = "Minecraft Java Connection (TCP 25565)"
             from_port        = 25565
             ipv6_cidr_blocks = []
             prefix_list_ids  = []
