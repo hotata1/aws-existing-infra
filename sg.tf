@@ -1,0 +1,67 @@
+# sg.tf (修正後)
+
+resource "aws_security_group" "minecraft_sg" {
+    # 💡 VPC ID を参照に変更
+    vpc_id      = aws_vpc.main_vpc.id
+
+    name        = "minecraft-prd-securitygroup"
+    # 💡 description をクリーンアップ
+    description = "minecraft-prd-securitygroup created 2025-11-03T13:49:25.779Z"
+
+    # 既存のルールをそのまま維持
+
+    # Egress Rules (アウトバウンド)
+    egress = [
+        {
+            cidr_blocks      = ["0.0.0.0/0"]
+            description      = "" # null や "null" ではなく空文字でシンプルに
+            from_port        = 0
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "-1" # すべてのプロトコル
+            security_groups  = []
+            self             = false
+            to_port          = 0
+        },
+    ]
+
+    # Ingress Rules (インバウンド)
+    ingress = [
+        {
+            cidr_blocks      = ["0.0.0.0/0"]
+            description      = ""
+            from_port        = 19132
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "udp"
+            security_groups  = []
+            self             = false
+            to_port          = 19132
+        },
+        {
+            cidr_blocks      = ["0.0.0.0/0"]
+            description      = ""
+            from_port        = 22
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 22
+        },
+        {
+            cidr_blocks      = ["0.0.0.0/0"]
+            description      = "Allow minecraft connections"
+            from_port        = 25565
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 25565
+        },
+    ]
+    
+    tags = {}
+    # name_prefix, owner_id, tags_all は削除
+}
