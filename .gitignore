@@ -21,3 +21,6 @@ crash.log
 
 # Terraformの履歴ファイル (非表示ファイル)
 .terraform_history
+
+# Lambda deployment package
+lambda_deployment_package.zip
